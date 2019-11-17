@@ -14,19 +14,19 @@ route.get('/costumers/:id', async (req, res, next) => {
     } catch (error) {
       res.sendStatus(HttpStatusCodes.INTERNAL_SERVER_ERROR);
     }
-  });
+});
 
 
-  oute.get('/costumers', async (req, res, next) => {
+route.get('/costumers', async (req, res, next) => {
     try {
       const costumer = await Costumer.getAll();
       res.send(costumer);
     } catch (error) {
       res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).send(error);
     }
-  });
+});
   
-  route.post('/costumers', async (req, res, next) => {
+ route.post('/costumers', async (req, res, next) => {
     try {
       await Costumer.create(req.body);
       const responseBody = { message: 'Registro inserido com sucesso!' };
@@ -34,7 +34,7 @@ route.get('/costumers/:id', async (req, res, next) => {
     } catch (error) {
       res.status(HttpStatusCodes.BAD_REQUEST).send(error);
     }
-  });
+});
   
   route.put('/costumers/:id', async (req, res, next) => {
     try {
@@ -56,22 +56,5 @@ route.get('/costumers/:id', async (req, res, next) => {
       res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).send(error);
     }
   });
-  
-  route.post('/costumers/:id/action', async (req, res, next) => {
-    try {
-      const deviceId = req.params.id;
-      const device = await User.getDeviceOfUser(req.user._id, deviceId);
-  
-      if (!device) {
-        res.sendStatus(HttpStatusCodes.NOT_FOUND);
-      } else {
-        mqtt.publish(device.deviceid, req.body.value);
-        res.status(HttpStatusCodes.OK).send();
-      }
-  
-    } catch (error) {
-      res.status(HttpStatusCodes.BAD_REQUEST).send(error);
-    }
-  });
-  
+    
   module.exports = route;
