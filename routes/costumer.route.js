@@ -28,6 +28,7 @@ route.get('/costumers', async (req, res, next) => {
   
  route.post('/costumers', async (req, res, next) => {
     try {
+
       await Costumer.create(req.body);
       const responseBody = { message: 'Registro inserido com sucesso!' };
       res.status(HttpStatusCodes.CREATED).send(responseBody);

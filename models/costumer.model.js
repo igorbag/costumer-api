@@ -23,3 +23,5 @@ class Costumer {
     return CostumerModel.find().lean();
   }
 }
+
+module.exports = Costumer;
