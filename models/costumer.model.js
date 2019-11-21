@@ -22,6 +22,27 @@ class Costumer {
   static getAll() {
     return CostumerModel.find().lean();
   }
+
+  static findByQuery(_query) {
+    let query = {}
+
+    if(_query.name != null){
+      query = {'name': {'$regex': _query.name}};
+    }
+
+    if(_query.cpf != null){
+      query = {cpf: {'$regex': _query.cpf}};
+    }
+
+    if(_query.phone != null){
+      query = {'phone': {'$regex': _query.phone}};
+    }
+
+    if(_query.email != null){
+      query = {'email': {'$regex': _query.email}};
+    }
+    return CostumerModel.find(query).lean();
+  }
 }
 
 module.exports = Costumer;

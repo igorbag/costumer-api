@@ -19,7 +19,7 @@ route.get('/costumers/:id', async (req, res, next) => {
 
 route.get('/costumers', async (req, res, next) => {
     try {
-      const costumer = await Costumer.getAll();
+      const costumer = await Costumer.findByQuery(req.query);
       res.send(costumer);
     } catch (error) {
       res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).send(error);
