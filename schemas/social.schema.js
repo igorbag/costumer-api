@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 
-const socialNetworkSchema = new mongoose.Schema({
-  socialNetwork: { type: String, required: true, minlength: 5, maxlength: 50 , unique:true},
+const schemaSocial = new mongoose.Schema({
+  socialName: { type: String, minlength: 5, maxlength: 100 },
+  link: { type: String, minlength: 10, maxlength: 100 }
 });
 
-module.exports = socialNetworkSchema;
+module.exports = schemaSocial;
